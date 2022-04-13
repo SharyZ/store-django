@@ -10,7 +10,13 @@ class CartItem(models.Model):
     product = models.ForeignKey('products.Product', on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 
+    def __str__(self):
+        return self.product.name
+
 
 class Cart(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     items = models.ForeignKey(CartItem, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.customer.username + ' carts'
