@@ -13,7 +13,7 @@ from .serializers import ProductSerializer
 @api_view(['GET'])
 def productsList(request):
     products = Product.objects.all()
-    serializer = ProductSerializer(products, many=True)
+    serializer = ProductSerializer(products, many=True, context={ "request": request })
 
     return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -22,7 +22,7 @@ def productsList(request):
 def productsDetail(request, product_id):
     try:
         product = Product.objects.get(id=product_id)
-        serializer = ProductSerializer(product, many=False)
+        serializer = ProductSerializer(product, many=False, context={ "request": request })
 
         return Response(serializer.data, status=status.HTTP_200_OK)
     except Product.DoesNotExist:
