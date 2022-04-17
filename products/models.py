@@ -11,7 +11,7 @@ class Product(models.Model):
     description = models.TextField(max_length=130, help_text='Description length must not exceed 130')
     price = models.IntegerField()
     created_at = models.DateTimeField(default=datetime.now)
-    category = models.ForeignKey('categories.Category', on_delete=models.SET_NULL, null=True, blank=True)
+    category = models.ForeignKey('categories.Category', on_delete=models.SET_NULL, null=True, blank=True, related_name='entries')
 
     def __str__(self):
         return self.name
